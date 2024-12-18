@@ -13,3 +13,5 @@ export interface ParsedLocation {
     lng: number,
     pointsCount: number
   ): string;
+
+  export function validateLocationId(id: string): boolean;

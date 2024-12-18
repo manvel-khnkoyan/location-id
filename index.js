@@ -7,12 +7,6 @@ const POINT_SCALE = {
   K: 1000,
 };
 
-// Internal helper functions
-function validateId(id) {
-  const regex = /^([A-Z]{2})([PM]\d{3}){2}(\d{18}){2}([BTMK]\d{3})$/;
-  return regex.test(id);
-}
-
 function parseCoordinate(coordsign, coordWhole, coordFrac) {
   const sign = coordsign === 'M' ? -1 : 1;
   return sign * parseFloat(coordWhole + '.' + coordFrac);
@@ -41,8 +35,13 @@ function formatPoints(pointsCount) {
 }
 
 // Exported functions
+export function validateLocationId(id) {
+  const regex = /^([A-Z]{2})([PM]\d{3}){2}(\d{18}){2}([BTMK]\d{3})$/;
+  return regex.test(id);
+}
+
 export function parseLocationId(id) {
-  if (!validateId(id)) throw new Error('Invalid Id');
+  if (!validateLocationId(id)) throw new Error('Invalid Id');
 
   const country = id.substring(0, 2);
   const lat = parseCoordinate(id.substring(2, 3), id.substring(3, 6), id.substring(10, 28));
