@@ -15,3 +15,6 @@ export interface ParsedLocation {
   ): string;
 
   export function validateLocationId(id: string): boolean;
+
+  export function parseScalePoints(scale: string, number: string): number;
+  

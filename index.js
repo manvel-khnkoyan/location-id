@@ -12,11 +12,6 @@ function parseCoordinate(coordsign, coordWhole, coordFrac) {
   return sign * parseFloat(coordWhole + '.' + coordFrac);
 }
 
-function parsePoints(scale, number) {
-  if (!POINT_SCALE[scale]) throw new Error('Invalid points scale');
-  return parseInt(number, 10) * POINT_SCALE[scale];
-}
-
 function formatCoordinateParts(coord) {
   const sign = coord < 0 ? 'M' : 'P';
   const absCoord = Math.abs(coord);
@@ -35,6 +30,11 @@ function formatPoints(pointsCount) {
 }
 
 // Exported functions
+export function parseScalePoints(scale, number) {
+  if (!POINT_SCALE[scale]) throw new Error('Invalid points scale');
+  return parseInt(number, 10) * POINT_SCALE[scale];
+}
+
 export function validateLocationId(id) {
   const regex = /^([A-Z]{2})([PM]\d{3}){2}(\d{18}){2}([BTMK]\d{3})$/;
   return regex.test(id);
@@ -46,7 +46,7 @@ export function parseLocationId(id) {
   const country = id.substring(0, 2);
   const lat = parseCoordinate(id.substring(2, 3), id.substring(3, 6), id.substring(10, 28));
   const lng = parseCoordinate(id.substring(6, 7), id.substring(7, 10), id.substring(28, 46));
-  const points = parsePoints(id.substring(46, 47), id.substring(47, 50));
+  const points = parseScalePoints(id.substring(46, 47), id.substring(47, 50));
 
   return { country, lat, lng, points };
 }
