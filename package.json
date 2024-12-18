@@ -1,0 +1,20 @@
+{
+  "name": "location-id",
+  "version": "1.0.0",
+  "main": "index.js",
+  "types": "types.d.ts",
+  "type": "module",
+ "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json"
+  },
+  "author": "Manvel Khnkoyan",
+  "license": "MIT",
+  "scripts": {
+    "test": "vitest --run"
+  },
+  "devDependencies": {
+    "eslint": "^9.15.0",
+    "vitest": "^2.1.6"
+  }
+}
